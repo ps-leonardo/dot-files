@@ -1,0 +1,5 @@
+bindkey -s "^g" "lc\n"
+bindkey -s "^h" "history 1\n"
+bindkey -s "^l" "clear\n"
+bindkey -s "^d" "dlfile\n"
+bindkey -s "^o" "source ~/.config/zsh/.zshrc && clear\n"

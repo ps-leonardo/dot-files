@@ -1,0 +1,45 @@
+# Copy output of last command
+alias c='"$(history | tail -2 | sed "s/  [0-9]*  //;2d")" > /tmp/cmdoutput && cat /tmp/cmdoutput | xsel -b && notify-send "Terminal" "Ouput Copied"'
+
+# Application Aliases
+alias v='nvim'
+alias p='pandoc'
+alias m='mpv'
+alias pman='sudo pacman'
+
+# Enhanced shell aliases
+#alias l='lsd -hA --group-dirs first'
+alias ls='exa --icons -a --group-directories-first'
+alias spt='launchspt'
+alias grep='grep --color=auto'
+alias vim='vim -u "$XDG_CONFIG_HOME/vim/vimrc"'
+alias mp='makepkg -sirc'
+alias mk='make >/dev/null || make'
+alias mki='make install >/dev/null || make'
+alias r='. ranger'
+alias q='exit'
+
+# Git aliases
+alias g='git'
+alias gst='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gpl='git pull'
+alias gpom='git pull origin master'
+alias gpu='git push'
+alias gpuom='git push origin master'
+alias gd='git diff'
+alias gch='git checkout'
+alias gnb='git checkout -b'
+alias gac='git add . && git commit'
+alias grs='git restore --staged .'
+alias gre='git restore'
+alias gr='git remote'
+alias gcl='git clone'
+alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias gt='git ls-tree -r master --name-only'
+alias grm='git remote'
+alias gb='git branch'
+alias gm='git merge'
+alias gf='git fetch'
+

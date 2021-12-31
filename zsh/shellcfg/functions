@@ -1,0 +1,61 @@
+# cd when exiting lf
+lc () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+
+dc () {
+    dfm
+    dir="$(cat ~/.config/dmenufm/dmenufm_lastpath)"
+    [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+}
+
+# Colourized less output
+cless() {
+  case "$1" in
+      *.md) glow -s dark "$1" | less -r;;
+      *) highlight -O ansi "$1" --force | less -r;;
+  esac
+}
+
+# Colourized cat output
+ccat() {
+  case "$1" in
+      *.md) glow -s dark "$1";;
+      *) highlight -O ansi "$1" --force;;
+  esac
+}
+
+# Function to source files if they exist
+function zsh_add_file() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+
+# Add completions
+function zsh_add_completion() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/completions/$PLUGIN_NAME" ]; then 
+        # For completions
+		completion_file_path=$(ls $ZDOTDIR/completions/$PLUGIN_NAME/_*)
+		fpath+="$(dirname "${completion_file_path}")"
+        zsh_add_file "completions/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/completions/$PLUGIN_NAME"
+		fpath+=$(ls $ZDOTDIR/completions/$PLUGIN_NAME/_*)
+        [ -f $ZDOTDIR/.zccompdump ] && $ZDOTDIR/.zccompdump
+    fi
+	completion_file="$(basename "${completion_file_path}")"
+	if [ "$2" = true ] && compinit "${completion_file:1}"
+}
+
+# Automatically cd into new directory
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
