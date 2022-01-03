@@ -10,6 +10,8 @@ return {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
 				},
+        maxPreload = 200,
+        preloadFileSize = 500
 			},
 		},
 	},

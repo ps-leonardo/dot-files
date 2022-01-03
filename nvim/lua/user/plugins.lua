@@ -45,6 +45,7 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "akinsho/bufferline.nvim"
+  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
 
   --Colorschemes
   use "Mofiqul/vscode.nvim"
@@ -66,6 +67,7 @@ return packer.startup(function(use)
   -- lsp
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "tamago324/nlsp-settings.nvim"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -77,6 +79,9 @@ return packer.startup(function(use)
     run = ":TSUpdate",
     }
   use "p00f/nvim-ts-rainbow"
+
+    -- Git
+  use "lewis6991/gitsigns.nvim"
 
   -- Nvim Tree
   use {
